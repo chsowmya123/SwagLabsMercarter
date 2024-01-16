@@ -2,8 +2,8 @@
 Feature: feature to add highest price item to cart
 
 Scenario: User should be able to add highest price item to cart
-Given User opens Browser 
-And User navigate to login page and login to website
-When User should add highest price item to cart
-Then user shoud be able to see highest price item in cart
+Given User is on the login page
+And User logs on to the website
+When User added the highest price item to cart
+Then User should see the highest price item in cart
 
