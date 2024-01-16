@@ -25,14 +25,18 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class AddToCart {
  WebDriver driver= null;
  @Before 
-@Given("User is on the login page")
-public void OpenBrower() {
+public void OpenBroswer() {
 	 WebDriverManager.chromedriver().setup();
 	 driver = new ChromeDriver();
 	 driver.navigate().to("https://www.saucedemo.com");
 	 driver.manage().window().maximize();
 }
 
+ @Given("User is on the login page")
+ public void verifyLoginPage() {
+	 WebElement LoginPage =  driver.findElement(By.className("login_wrapper"));
+	 Assert.assertTrue("Login page verified", LoginPage.isDisplayed());
+ }
 @And("User logs on to the website")
 public void LoginAsUser() {
 	driver.findElement(By.id("user-name")).sendKeys("standard_user");
@@ -51,12 +55,8 @@ public void AddHighestPriceToCart() throws InterruptedException{
 	Double[] sorted = new Double[Dprice.size()];
 	for(int i=0;i<Dprice.size();i++) {
 		 sorted[i]=Dprice.get(i);
-		
 	}
 	Arrays.sort(sorted, Collections.reverseOrder());
-	
-	
-	
 	for(int j=0;j<Dprice.size();j++) 
 	{
 		
@@ -68,7 +68,6 @@ public void AddHighestPriceToCart() throws InterruptedException{
 		}
 	}
 	}
-
 @Then("User should see the highest price item in cart")
 public void UserInCartPage()  {
 	driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
@@ -77,9 +76,7 @@ public void UserInCartPage()  {
 	String ItemNameActual = driver.findElement(By.xpath("//*[@id=\"item_5_title_link\"]/div")).getText();
 	String ItemNameExpected = "Sauce Labs Fleece Jacket";
 	Assert.assertEquals(ItemNameActual, ItemNameExpected);
-	
-	
-    }
+	 }
 @After
 public void CloseBrowser() {
 	driver.quit();
