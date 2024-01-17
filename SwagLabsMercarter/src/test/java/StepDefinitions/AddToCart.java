@@ -25,7 +25,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class AddToCart {
  WebDriver driver= null;
  @Before 
-public void OpenBroswer() {
+public void openBroswer() {
 	 WebDriverManager.chromedriver().setup();
 	 driver = new ChromeDriver();
 	 driver.navigate().to("https://www.saucedemo.com");
@@ -46,7 +46,7 @@ public void LoginAsUser() {
 }
 
 @When("User added the highest price item to cart")
-public void AddHighestPriceToCart() throws InterruptedException{
+public void addHighestPriceToCart() throws InterruptedException{
 	List<WebElement> Eprice = driver.findElements(By.className("inventory_item_price"));
 	List<Double> Dprice =new ArrayList<>();
 	for(WebElement a : Eprice) {
@@ -69,7 +69,7 @@ public void AddHighestPriceToCart() throws InterruptedException{
 	}
 	}
 @Then("User should see the highest price item in cart")
-public void UserInCartPage()  {
+public void userInCartPage()  {
 	driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 	driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
 	driver.findElement(By.className("shopping_cart_link")).click();
@@ -78,7 +78,7 @@ public void UserInCartPage()  {
 	Assert.assertEquals(ItemNameActual, ItemNameExpected);
 	 }
 @After
-public void CloseBrowser() {
-	driver.quit();
+public void closeBrowser() {
+	//driver.quit();
 }
 }
